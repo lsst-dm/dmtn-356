@@ -198,7 +198,7 @@ The Science Pipelines, with their configuration and static calibration data, are
 % ============================================================
 
 Rubin operates a dedicated Rucio and FTS instance for all inter-facility data movement.
-Raw images are replicated daily from the USDF to the European facilities as they leave the 80-hour embargo; each day's $\sim$1\,000 exposures, each packaged as a single $\sim$4~GB file, pose no difficulty for Rucio and FTS~\cite{2025EPJWC.33701129H}.
+Raw images are replicated daily from the USDF to the European facilities; each day's $\sim$1\,000 exposures, each packaged as a single $\sim$4~GB file, pose no difficulty for Rucio and FTS~\cite{2025EPJWC.33701129H}.
 Each facility exposes two Rucio Storage Elements (RSEs), one for inputs and one for processing outputs, which allows transfers to be prioritised and protects the irreplaceable raw data.
 The harder direction is returning processed products to the USDF: processing expands the data volume by up to a factor of ten, producing from each raw image many new, smaller data products (KB to 100~MB), which Rucio and FTS handle poorly at this scale (\S\ref{sec:challenges}).
 
