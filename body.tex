@@ -203,7 +203,7 @@ Each facility exposes two Rucio Storage Elements (RSEs), one for inputs and one 
 The harder direction is returning processed products to the USDF: processing expands the data volume by up to a factor of ten, producing from each raw image many new, smaller data products (KB to 100~MB), which Rucio and FTS handle poorly at this scale (\S\ref{sec:challenges}).
 
 Butler and Rucio are connected by two components (Figure~\ref{fig:butler_rucio}).
-At the sending side, \texttt{rucio\_register}, run by final pipeline jobs, selects output files from the local Butler and registers them in Rucio datasets, attaching $\sim$500~bytes of Rubin metadata to each file's Rucio metadata so that no separate metadata file is needed; pre-configured subscription rules then trigger replication.
+At the sending side, \texttt{rucio\_register}, run by final pipeline jobs, selects output files from the local Butler and registers them in Rucio datasets (groups of files), attaching $\sim$500~bytes of Rubin metadata to each file's Rucio metadata so that no separate metadata file is needed; pre-configured subscription rules then trigger replication.
 Only final products are registered; intermediate products, which can outnumber them tenfold, stay local.
 
 At the receiving side, a file delivered by FTS lands in storage but is invisible to the local Butler, so no pipeline can use it.
