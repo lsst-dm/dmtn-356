@@ -163,6 +163,9 @@ The sky is partitioned into tracts of $\sim$1.6$^\circ$ on a side, each divided 
 Each facility receives its assigned tracts plus a buffer of adjacent patches for objects that straddle a boundary, such as bright stars, extended galaxies and moving asteroids; small overlap regions are processed at all three facilities and compared as numerical consistency checks before each release.
 All processing is orchestrated centrally from the USDF, including jobs that execute at remote facilities.
 
+The USDF, Rubin's allocation within SLAC's Shared Scientific Data Facility (S3DF), has 145 batch nodes ($\sim$17,400 cores, $\sim$21,600 Milano-equivalent) and $\sim$30~PB of installed disk, representative of the scale at each facility; beyond the batch and storage tier, the USDF hosts a 92-node Qserv cluster for catalog queries and a 12-node Cassandra cluster for the Alert Production Database (APDB).
+DP2 consumed $\sim$970 node-days ($\sim$2.8~million core-hours) to process $\sim$30,000 visits; DR1 is estimated at $\sim$35~million core-hours ($\sim$12,000 node-days), growing linearly with each subsequent release.
+
 % ============================================================
 \subsection{Summit to US Data Facility}
 \label{sec:summit-usdf}
