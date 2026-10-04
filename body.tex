@@ -13,7 +13,7 @@ The sky is imaged according to a survey strategy developed with the global scien
 real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
 Roughly every 30~s, the FBS ingests telemetry on the observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage. 
 Each night, Rubin produces $\sim$10~TB of raw images and up to 10~million transient alerts, issued within 120~s of shutter close.
-Separately, all images acquired to date are reprocessed approximately annually into a single dataset, released as a Data Release, that enables multiple independent science programmes across a global community of $\sim$7500 scientists.
+Separately, all images acquired to date are reprocessed approximately annually into a single dataset, released as a Data Release, that enables multiple independent science programs across a global community of $\sim$7500 scientists.
 
 To the high-energy physics (HEP) community, this picture is familiar.
  A large LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces a common dataset shared by the whole collaboration: the same data underpin Higgs measurements, B-physics, top-quark properties and searches for physics beyond the Standard Model. 
@@ -23,7 +23,7 @@ In these respects, Rubin has more in common with an LHC experiment than with poi
 
 Recognising this, Rubin looked to established HEP tools, including Rucio~\cite{2019CSBS....3...11B}, PanDA~\cite{2024EPJWC.29504026K}, HTCondor and CernVM-FS~\cite{2011JPhCS.331d2003B}, rather than building astronomy-specific infrastructure from scratch.
 The choice was also a practical one: all three Rubin data facilities are Worldwide LHC Computing Grid (WLCG) sites.
-SLAC National Accelerator Laboratory, the lead Rubin data facility and archive centre, is an ATLAS Tier-2 site, and the French and UK data facilities are long-standing LHC Tier-1 centres, each with operational experience of these tools and the networks needed for petabyte-scale data movement. 
+SLAC National Accelerator Laboratory (USDF), the lead Rubin data facility and archive centre is an ATLAS Tier-2 site, the French facility (FrDF) (CC-IN2P3, an LHC Tier-1 centre) and the UK facility (UKDF) (RAL, an LHC Tier-1 centre, together with the GridPP Tier-2 site at Lancaster) are long-standing WLCG centres, each with operational experience of these tools and the networks needed for petabyte-scale data movement.
 During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP) for the full LSST, starting with Data Release 1 (DR1), expected in 2028.
 Rubin has drawn on more than a decade of HEP operational experience at petabyte scale, and in turn is extending these tools to new storage paradigms and computing environments.
 
@@ -36,7 +36,7 @@ This paper describes the end-to-end Rubin computing ecosystem as it stands at th
 
 Rubin Observatory is a dedicated survey facility, jointly funded by the US National Science Foundation and the US Department of Energy Office of Science, on Cerro~Pach\'{o}n in northern Chile.
 The 2647~m site offers dark, dry and stable skies, more than 300 clear nights per year, and access to the Galactic centre and the Magellanic Clouds.
-The scientific vision behind LSST was pioneered by J.\ Anthony Tyson (UC Davis), who proposed a wide-area survey to map dark matter and explore the time-domain Universe.
+The scientific vision behind Rubin Observatory and the LSST was pioneered by J.\ Anthony Tyson (UC Davis), who proposed the Dark Matter Telescope~\cite{2001ASPC..237..417T}, a wide-area survey to map dark matter and explore the time-domain Universe.
 Such a survey requires a large aperture, a very wide field of view, and the agility to move rapidly between fields.
 Correcting spherical aberration, coma, and astigmatism over a wide field requires three mirrors, but classical three-mirror designs spread the mirrors far apart, giving a long, slow structure.
 Roger Angel (University of Arizona) recognised that the primary (M1) and tertiary (M3) mirrors could be cast and polished from a single borosilicate blank.
@@ -80,7 +80,7 @@ The wide-fast-deep main survey covers $\sim$18\,000~sq~deg of the southern sky; 
 \label{sec:science}
 % ============================================================
 
-LSSTCam saw first photons on 15~April~2025, and on 23~June~2025 Rubin released its first public images in the ``First Look'' campaign, designed to showcase Rubin's unique combination of wide field, depth and speed
+LSSTCam saw first photons on 15~April~2025, and on 23~June~2025 Rubin released its first public images in the ``First Look'' campaign, designed to showcase Rubin's unique combination of wide field, depth and speed.
 Both First Look images were processed with the LSST Science Pipelines (\S\ref{sec:pipelines}), making them a commissioning exercise as well as a scientific demonstration.
 The first combines 678 exposures of the Trifid and Lagoon Nebulae, taken over just 7.2~hours, into a $\sim$5-gigapixel mosaic (Figure~\ref{fig:trifid}), showing how quickly Rubin builds depth: faint gas and dust in a crowded Galactic field, revealed in a single night.
 The second, the ``Cosmic Treasure Chest'', combines 1185 images of $\sim$25~deg$^2$ of the southern Virgo Cluster taken over seven nights (Figure~\ref{fig:treasure}), showing the combination of area and depth: $\sim$10~million galaxies, from bright cluster members to faint, distant background galaxies, in a region only a few times the camera's field of view.
@@ -115,19 +115,18 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 \end{figure}
 
 Before the first LSST Data Release, commissioning data reach the community through Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
-Data Preview 1 (DP1) ~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam data, the first real Rubin data, and Data Preview 2 (DP2)~\cite{ RTN-115}, released on 27~July~2026 and processed entirely at the USDF, covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS precovery images\footnote{\url{https://dp2.lsst.io}}.
+Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam data, the first real Rubin data, and Data Preview 2 (DP2)~\cite{ RTN-115}, released on 27~July~2026 and processed entirely at the USDF, covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS precovery images\footnote{\url{https://dp2.lsst.io}}.
 
 % ============================================================
 \section{The Rubin Data Management System}
 \label{sec:ecosystem}
 % ============================================================
 
-Rubin's Data Management System (DMS), shown in figure~\ref{fig:photons_to_science}, runs as a fully automated, end-to-end system.
+Rubin's Data Management System (DMS), shown in figure~\ref{fig:photons_to_science}, is designed to operate as an automated, end-to-end system with minimal human intervention.
 Each 30~s exposure is read out in 2~s as 205 sensor files (189 science, 8 wavefront and 8 guider), totalling $\sim$4~GB compressed ($\sim$8.2~GB uncompressed).
 The survey produces $\sim$10~TB of raw data per night, with processed products far larger; the final catalog alone is projected at $\sim$15~PB.
-% Check these numbers - 10TB/night, assume 300 nights
 Data are processed in two complementary streams.
-\textit{Prompt Processing}~\cite{2026arXiv260319541F}, run nightly at the US Data Facility (USDF) only, is designed for speed, delivering data quickly enough to enable follow-up of transient and moving objects: each exposure is differenced against a template, and up to 10~million alerts per night distributed to seven community brokers\footnote{https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers} within 120~s, followed by catalogs within 24~h~\cite{DMTN-293} and images within 80~h.
+\textit{Prompt Processing}~\cite{2026arXiv260319541F}, run nightly at the US Data Facility (USDF) only, is designed for speed, delivering data quickly enough to enable follow-up of transient and moving objects: each exposure is differenced against a template, and up to 10~million alerts per night distributed to seven community brokers\footnote{\url{https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers}} within 120~s, followed by catalogs within 24~h~\cite{DMTN-293} and images within 80~h.
 \textit{Data Release Processing} (DRP) is optimised for quality, for science that is not time-critical: approximately once a year, the full cumulative dataset is reprocessed with the latest pipelines, producing Data Releases that are successively deeper and more precise.
 %
 \begin{figure}[t]
@@ -139,7 +138,7 @@ Prompt Data Products prioritise speed; Data Release Data Products prioritise qua
 \end{figure}
 
 Rubin's distributed computing layer started from the HEP tool stack (Rucio and FTS for data movement, CernVM-FS for software distribution, HTCondor for batch processing), because its data challenge resemble those of an LHC experiment (\S\ref{sec:intro}) and its data facilities already run these tools.
-The central engineering challenge is a mismatch of abstraction: the Butler~\cite{2022SPIE12189E..11J}, Rubin's data middleware, manages scientific \textit{datasets} identified by instrument, sky region and observation metadata, whereas these tools operate on files.
+The central engineering challenge is a mismatch of abstraction: the Butler~\cite{2022SPIE12189E..11J}, Rubin's data middleware, manages scientific \textit{datasets} identified by instrument, sky region and observation metadata, whereas these tools operate on files identified solely by pathname.
 
 % ============================================================
 \subsection{The Distributed Data Facility Network}
@@ -147,14 +146,12 @@ The central engineering challenge is a mismatch of abstraction: the Butler~\cite
 % ============================================================
 %
 Dedicated long-haul links carry each exposure from the summit to the USDF at SLAC within seconds of readout, with a three-day summit buffer protecting against network outages (Figure~\ref{fig:network}).
-Annual DRP is then divided across three international data facilities~\cite{2024EPJWC.29501042H,2025EPJWC.33701234H}: the USDF (35\%), which hosts the archive centre with the reference copy of all published data products and is the only site running Prompt Processing; the French Data Facility (FrDF) at CC-IN2P3 in Lyon (40\%), which holds a full copy of the raw data; and the UK Data Facility (UKDF), provided through IRIS and GridPP (25\%), which holds only the raw data for its assigned sky region plus the adjacent patches needed at boundaries.
-CC-IN2P3 and the UK facility are long-standing LHC Tier-1 centres and SLAC is an ATLAS Tier-2 site, so the infrastructure, expertise and staff experience needed to run HEP tools are already in place.
+Annual DRP is divided across the three facilities~\cite{2024EPJWC.29501042H,2025EPJWC.33701234H}: the USDF (35\%), which hosts the archive and is the only site running Prompt Processing; the FrDF (40\%), which holds a full copy of the raw data; and the UKDF (25\%), which holds only the raw data for its assigned sky region plus the adjacent patches needed at boundaries.
+CC-IN2P3 and the UK facility are long-standing WLCG sites, so the infrastructure, expertise and staff experience needed to run HEP tools are already in place.
 
 Inter-site connectivity is provided by ESnet, G\'{E}ANT, JANET and RENATER, with transatlantic round-trip times of up to $\sim$165~ms.
-Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003, RTN-104}) that host published data products.
-
+Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night compressed); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003, RTN-104}) that host published data products.
 %
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth,clip]{rubin_network_dataflow}
@@ -173,24 +170,27 @@ All processing is orchestrated centrally from the USDF, including jobs that exec
 
 The summit is connected to SLAC by a 100/40~Gbps primary/backup long-haul link with hardware-accelerated IPsec encryption.
 Each exposure must reach the USDF within $\sim$7~s so that Prompt Processing can finish within its 120~s budget; a new exposure follows every $\sim$35--40~s.
-Transfer is handled by a small custom Rust daemon that writes all 205 sensor files in parallel to an S3-compatible object store at the USDF, keeping a pool of persistent connections open to avoid the TLS handshake and TCP slow-start cost on every file over a high-latency international link.
+Transfer is handled by \texttt{s3nd} (Deliverator), a small custom Go daemon that writes all 205 sensor files in parallel to an S3-compatible object store at the USDF, keeping a pool of persistent connections open to avoid the TLS handshake and TCP slow-start cost on every file over a high-latency international link.
 A listener at the USDF watches the bucket, triggers Butler ingestion, and launches Prompt Processing as each exposure arrives.
-In operations, 80\% of exposures arrive within 7~s; the tail comes from network switch failover events and occasional camera retransmissions, which appear as long transfers because the shutter-close timestamp is fixed while the file arrives late.
-Telemetry from the Engineering Facility Database (EFD) is transferred as messages via Sasquatch, a Kafka-based system, and certified calibration products are returned from the archive to the summit via rsync at $\mathcal{O}(100)$~GB~day$^{-1}$.
+In early operations, 80\% of exposures arrive within 7~s; the tail stems from several causes, including network failover, camera retransmission, and queueing at the shared USDF object store.
+Telemetry from the Engineering Facility Database (EFD) is transferred as messages via Sasquatch~\cite{2024SPIE13101E..1MF}, a Kafka-based system, and certified calibration products are returned from the archive to the summit via rsync at $\mathcal{O}(100)$~GB~day$^{-1}$.
 
 % ============================================================
 \subsection{Science Pipelines, Middleware, and Workflow Orchestration}
 \label{sec:pipelines}
 % ============================================================
 %
-The LSST Science Pipelines~\cite{PSTN-019} implement the scientific algorithms, from instrument signature removal through calibration, coaddition and difference imaging to catalog production, as \texttt{PipelineTask}s.
-All input and output passes through the Butler~\cite{2022SPIE12189E..11J}, which hides file locations and formats from algorithm developers: tasks access data by scientific identifier (instrument, visit, detector, band, sky region), never by file path, and each repository combines a relational registry with a datastore on POSIX or S3-compatible storage.
+The LSST Science Pipelines~\cite{PSTN-019} implement the scientific algorithms, from instrument signature removal through calibration, coaddition and difference imaging to catalog production.
+All input and output passes through the Butler~\cite{2022SPIE12189E..11J}, which hides file locations and formats from algorithm developers: tasks access data by scientific identifier (instrument, visit, detector, band, sky region), never by file path, and each repository combines
+% TODO: Comment from Tim needs checking -- "I thought the European sites were all using WebDAV and not using POSIX."
+a relational registry with a datastore on POSIX, WebDAV or S3-compatible storage.
 
-The Batch Processing System (BPS) queries the Butler registry and builds a Quantum Graph, a directed acyclic graph in which each node is one \texttt{PipelineTask} applied to one unit of data; for a full release campaign it contains millions of nodes.
+The Batch Processing System (BPS) (\cite{2025ASPC..538..325G}) queries the Butler registry and builds a Quantum Graph, a directed acyclic graph in which each node is one \texttt{PipelineTask} applied to one unit of data; for a full release campaign it contains millions of nodes.
 BPS translates the graph into batch jobs through pluggable backends.
 The primary backend is HTCondor: BPS submits directly from the USDF to the European facilities, whose batch resources are exposed through ARC-CE over SLURM (FrDF) and HTCondor (UKDF), providing cross-site orchestration through the same interface as at the USDF, without a dedicated pilot system.
 Rubin used PanDA~\cite{2024EPJWC.29504026K} through commissioning, DP1 and DP2, which validated centralised cross-site submission and the separation of workflow description from execution environment.
-It now favours BPS with HTCondor because the Quantum Graph already encodes all data dependencies and provenance, so a lightweight submission layer built around Butler's data model suffices, rather than a general-purpose workload management system.
+Rubin now favors BPS with HTCondor because the Quantum Graph already encodes all data dependencies and provenance, so a lightweight submission layer built around Butler's data model suffices, rather than a general-purpose workload management system.
+PanDA remains a validated alternative backend for workflows that require richer workload management.
 
 The Science Pipelines, with their configuration and static calibration data, are built once and distributed via CernVM-FS (Stratum-0 at FrDF, Stratum-1 replicas elsewhere) to all data facilities, IDACs and Rubin Science Platform deployments, so that identical code runs everywhere, a prerequisite for the cross-facility consistency checks.
 
@@ -199,19 +199,27 @@ The Science Pipelines, with their configuration and static calibration data, are
 % ============================================================
 
 Rubin operates a dedicated Rucio and FTS instance for all inter-facility data movement.
-Raw images are replicated daily from the USDF to the European facilities; each day's $\sim$1\,000 exposures, each packaged as a single $\sim$4~GB file, pose no difficulty for Rucio and FTS~\cite{2025EPJWC.33701129H}.
+Raw images are replicated daily from the USDF, with a 3-day embargo delay (see~\cite{DMTN-199}), to the European facilities; each day's $\sim$1\,000 exposures are bundled into a single $\sim$4~GB zip archive of per-detector FITS files.
+Bundling simplifies transfer and archiving for Rucio and FTS~\cite{2025EPJWC.33701129H} but adds complexity to the Butler and the data access services, which must index and retrieve individual files within each archive.
+
 Each facility exposes two Rucio Storage Elements (RSEs), one for inputs and one for processing outputs, which allows transfers to be prioritised and protects the irreplaceable raw data.
-The harder direction is returning processed products to the USDF: processing expands the data volume by up to a factor of ten, producing from each raw image many new, smaller data products (KB to 100~MB), which Rucio and FTS handle poorly at this scale (\S\ref{sec:challenges}).
+The harder direction is returning processed products to the USDF: processing expands the data volume by up to a factor of ten, producing from each raw image many new, smaller data products (KB to 100~MB).
+Unlike raw ingest, processed outputs are not re-bundled, so each zipped raw expands into 189 separate output files, which Rucio and FTS handle poorly at this scale (\S\ref{sec:challenges}).
 
 Butler and Rucio are connected by two components (Figure~\ref{fig:butler_rucio}).
-At the sending side, \texttt{rucio\_register}, run by final pipeline jobs, selects output files from the local Butler and registers them in Rucio datasets (groups of files), attaching $\sim$500~bytes of Rubin metadata to each file's Rucio metadata so that no separate metadata file is needed; pre-configured subscription rules then trigger replication.
-Only final products are registered; intermediate products, which can outnumber them tenfold, stay local.
+At the sending side, \texttt{rucio\_register}, run by final pipeline jobs, registers output files from the Butler into Rucio datasets (collections of files), attaching $\sim$500~bytes of science metadata per file directly to the Rucio record so that no separate sidecar file is needed; pre-configured subscription rules then trigger replication.
+Only final data products are registered; intermediates, which can outnumber them tenfold, stay local.
+One exception is the DR1 global calibration step, which requires a mid-campaign round trip: per-visit star catalogs and visit summaries travel from each facility to the USDF, and the resulting calibration products are returned to all sites before processing can continue.
+Developers also occasionally need intermediate products at the USDF for debugging.
+This round trip is the strongest argument for event-driven ingest over polling (\S\ref{sec:challenges}).
 
 At the receiving side, a file delivered by FTS lands in storage but is invisible to the local Butler, so no pipeline can use it.
 HermesK~\cite{2025EPJWC.33701129H}, a modified Rucio Hermes daemon, closes this gap.
 Like the rest of Rucio, it runs centrally at the USDF, and all Kafka traffic originates there.
 HermesK watches the Rucio database for Rubin transfer-completion events, attaches the Rubin metadata, and publishes each event to a Kafka topic named after the destination RSE recorded in the event.
-Each facility subscribes only to its own topic, so it receives only messages it can act on, and a \texttt{ctrl\_ingestd} daemon there ingests each arriving file into the local Butler: data become available for processing through events alone, without polling or manual intervention.
+Each facility subscribes only to its own topic, so it receives only messages it can act on; each event carries the data ID, filename, UUID and science metadata, and \texttt{ctrl\_ingestd} ingests each arriving file into the local Butler, making it available for processing without polling.
+This holds provided the corresponding Butler dimension records already exist at the destination; if they are absent, ingestion fails.
+Calibration collections and chained collection definitions are not propagated by events and are currently rebuilt by hand.
 Kafka was chosen over ActiveMQ, which Hermes already supports, because Kafka's MirrorMaker provides cross-site message replication out of the box and Rubin already had extensive Kafka expertise, including from its EFD telemetry system.
 
 % Update status before submission
@@ -242,7 +250,7 @@ Scientists access the data through the Rubin Science Platform~\cite{2024SPIE1310
 % ============================================================
 
 DR1 will be the first full LSST release: an end-to-end multi-site campaign over $\sim$5~PB of raw data from the first year of the survey, with automated data movement in both directions across all three facilities.
-The components described in \S\ref{sec:ecosystem} have been exercised individually during commissioning and DP2 processing; the remaining work is to run them together at DR1 scale, reliably and repeatedly.
+The components described in \S\ref{sec:ecosystem} have been exercised individually during commissioning and the DP2 pilot campaigns at FrDF; no end-to-end campaign has yet run across all three sites at DR1 scale, and doing so reliably and repeatedly is the remaining challenge.
 Deploying them has exposed friction points that are instructive for any experiment crossing the HEP--astronomy boundary.
 
 The most important enabling factor was institutional overlap.
@@ -255,9 +263,13 @@ File counts therefore reach billions per Data Release, many in the KB to few-MB 
 Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products, and returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
 S3 object storage at the USDF avoids POSIX inode limits, but bridging it to POSIX storage at the European facilities remains an active engineering problem; more broadly, object storage combined with a science-metadata layer such as the Butler is a concrete alternative for any workload, in astronomy or HEP, that produces many small outputs.
 
-The second challenge is keeping the Butler's dataset model consistent with the file-oriented tools across three independent sites.
-Each site's registry knows only about locally present files.
-HermesK and \texttt{ctrl\_ingestd} (\S\ref{sec:rucio}) solve this for file arrival with an event-driven pattern; ensuring that calibration updates are propagated and acknowledged at every site before a campaign, which cannot be done by polling at Data Release scale, is an active area of development.
+The second challenge is keeping the Butler's dataset model consistent with the file-oriented tools across three independent sites, and it is directly connected to the small-file problem: both difficulties trace back to having two independent systems that each record where a file resides.
+Each site's Butler registry knows only about locally present files.
+HermesK and \texttt{ctrl\_ingestd} (\S\ref{sec:rucio}) automate file arrival for datasets whose dimension records already exist at the destination; ensuring that calibration updates are propagated and acknowledged at every site before a campaign, which cannot be done by polling at Data Release scale, is an active area of development.
+Verifying end-to-end completeness also remains open: Rucio tracks whether a file has been transferred, but not whether it has been successfully ingested into the local Butler, leaving no unified view of what is actually available for processing at each site.
+The large file counts compound the problem at campaign end: retiring intermediate products requires purging records from both Rucio and the Butler registry, an operation that is slow at this scale.
+Extending Butler to carry multi-site location information natively is one approach under active consideration.
+Keeping dimension records current across sites adds a further layer of complexity: when a header error is identified after ingest, the correction must be applied to Butler's dimension records at every facility, a synchronisation problem with no equivalent in the single-registry HEP model.
 
 % ============================================================
 \section{Conclusions}
