@@ -12,7 +12,7 @@ LSST has no PI-driven programs.
 The sky is imaged according to a survey strategy developed with the global scientific community~\cite{PSTN-055}, and observations are selected in
 real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
 Roughly every 30~s, the FBS ingests telemetry on the observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage. 
-Each night, Rubin produces $\sim$10~TB of raw images and up to 10~million transient alerts, issued within 120~s of shutter close.
+Each night, Rubin takes $\sim$700 science exposures, producing $\sim$10~TB of raw images (uncompressed) and up to 10~million transient alerts, issued within 120~s of shutter close.
 Separately, all images acquired to date are reprocessed approximately annually into a single dataset, released as a Data Release, that enables multiple independent science programs across a global community of $\sim$7500 scientists.
 
 To the high-energy physics (HEP) community, this picture is familiar.
@@ -83,23 +83,26 @@ The wide-fast-deep main survey covers $\sim$18\,000~sq~deg of the southern sky; 
 LSSTCam saw first photons on 15~April~2025, and on 23~June~2025 Rubin released its first public images in the ``First Look'' campaign, designed to showcase Rubin's unique combination of wide field, depth and speed.
 Both First Look images were processed with the LSST Science Pipelines (\S\ref{sec:pipelines}), making them a commissioning exercise as well as a scientific demonstration.
 The first combines 678 exposures of the Trifid and Lagoon Nebulae, taken over just 7.2~hours, into a $\sim$5-gigapixel mosaic (Figure~\ref{fig:trifid}), showing how quickly Rubin builds depth: faint gas and dust in a crowded Galactic field, revealed in a single night.
-The second, the ``Cosmic Treasure Chest'', combines 1185 images of $\sim$25~deg$^2$ of the southern Virgo Cluster taken over seven nights (Figure~\ref{fig:treasure}), showing the combination of area and depth: $\sim$10~million galaxies, from bright cluster members to faint, distant background galaxies, in a region only a few times the camera's field of view.
+The second, the ``Cosmic Treasure Chest'', combines 1185 exposures of $\sim$25~deg$^2$ of the southern Virgo Cluster taken over seven nights
+% (Figure~\ref{fig:treasure})
+and illustrates the combination of area and depth: $\sim$10~million  galaxies, from bright cluster members to faint, distant background  galaxies, in a region only a few times the camera's field of view.
+At $\sim$98\,000$\times$52\,000 pixels, the released mosaic would need  roughly 600 4K displays to be shown at full resolution, so it is best explored with the interactive Rubin Skyviewer\footnote{\url{https://skyviewer.app}}.
 %
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.9\columnwidth,clip]{Im7-10k-print}
+\includegraphics[width=\columnwidth,clip]{Im7-10k-print}
 \caption{Rubin First Look image of the Trifid (M20) and Lagoon (M8) Nebulae, combining 678 exposures taken over 7.2~hours into a $\sim$5-gigapixel mosaic.
 Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 \label{fig:trifid}
 \end{figure}
 %
-\begin{figure}[htb]
-\includegraphics[width=\columnwidth,clip]{noirlab2521f}
-\caption{The ``Cosmic Treasure Chest'': Rubin's First Look image of the southern Virgo Cluster around M49, combining 1\,185 images taken over 10.5~hours on seven nights and covering $\sim$25~deg$^2$.
-Known objects are annotated.
-Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
-\label{fig:treasure}
-\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[width=\columnwidth,clip]{noirlab2521f}
+%\caption{The ``Cosmic Treasure Chest'': Rubin's First Look image of the southern Virgo Cluster around M49, combining 1\,185 images taken over 10.5~hours on seven nights and covering $\sim$25~deg$^2$.
+%Known objects are annotated.
+%Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
+%\label{fig:treasure}
+%\end{figure}
 
 The same commissioning data are already producing discoveries.
 The First Look observations alone yielded 1\,514 new asteroids, and a further $\sim$11\,000, including $\sim$380 trans-Neptunian objects, were found in the commissioning surveys of mid-2025.
@@ -122,20 +125,22 @@ Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam da
 \label{sec:ecosystem}
 % ============================================================
 
-Rubin's Data Management System (DMS), shown in figure~\ref{fig:photons_to_science}, is designed to operate as an automated, end-to-end system with minimal human intervention.
+Rubin's Data Management System (DMS),
+%shown in figure~\ref{fig:photons_to_science},
+is designed to operate as an automated, end-to-end system with minimal human intervention.
 Each 30~s exposure is read out in 2~s as 205 sensor files (189 science, 8 wavefront and 8 guider), totalling $\sim$4~GB compressed ($\sim$8.2~GB uncompressed).
-The survey produces $\sim$10~TB of raw data per night, with processed products far larger; the final catalog alone is projected at $\sim$15~PB.
+The survey produces $\sim$10~TB of raw data per night (uncompressed), with processed products far larger; the final catalog alone is projected at $\sim$15~PB.
 Data are processed in two complementary streams.
 \textit{Prompt Processing}~\cite{2026arXiv260319541F}, run nightly at the US Data Facility (USDF) only, is designed for speed, delivering data quickly enough to enable follow-up of transient and moving objects: each exposure is differenced against a template, and up to 10~million alerts per night distributed to seven community brokers\footnote{\url{https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers}} within 120~s, followed by catalogs within 24~h~\cite{DMTN-293} and images within 80~h.
 \textit{Data Release Processing} (DRP) is optimised for quality, for science that is not time-critical: approximately once a year, the full cumulative dataset is reprocessed with the latest pipelines, producing Data Releases that are successively deeper and more precise.
 %
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth,clip]{photons_to_science}
-\caption{Overview of the Rubin Data Management System.
-Prompt Data Products prioritise speed; Data Release Data Products prioritise quality.}
-\label{fig:photons_to_science}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=\columnwidth,clip]{photons_to_science}
+%\caption{Overview of the Rubin Data Management System.
+%Prompt Data Products prioritise speed; Data Release Data Products prioritise quality.}
+%\label{fig:photons_to_science}
+%\end{figure}
 
 Rubin's distributed computing layer started from the HEP tool stack (Rucio and FTS for data movement, CernVM-FS for software distribution, HTCondor for batch processing), because its data challenge resemble those of an LHC experiment (\S\ref{sec:intro}) and its data facilities already run these tools.
 The central engineering challenge is a mismatch of abstraction: the Butler~\cite{2022SPIE12189E..11J}, Rubin's data middleware, manages scientific \textit{datasets} identified by instrument, sky region and observation metadata, whereas these tools operate on files identified solely by pathname.
@@ -252,7 +257,7 @@ Scientists access the data through the Rubin Science Platform~\cite{2024SPIE1310
 \label{sec:challenges}
 % ============================================================
 
-DR1 will be the first full LSST release: an end-to-end multi-site campaign over $\sim$5~PB of raw data from the first year of the survey, with automated data movement in both directions across all three facilities.
+DR1 will be the first full LSST release: an end-to-end multi-site campaign over $\sim$4~PB of raw data (uncompressed) from the first year of the survey, with automated data movement in both directions across all three facilities.
 The components described in \S\ref{sec:ecosystem} have been exercised individually during commissioning and the DP2 pilot campaigns at FrDF; no end-to-end campaign has yet run across all three sites at DR1 scale, and doing so reliably and repeatedly is the remaining challenge.
 Deploying them has exposed friction points that are instructive for any experiment crossing the HEP--astronomy boundary.
 
