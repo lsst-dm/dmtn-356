@@ -7,8 +7,8 @@ On 30~June~2026, the NSF--DOE Vera C.\ Rubin Observatory began the Legacy Survey
 The observatory was named by Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman.
 
 Rubin works very differently from a traditional observatory. 
-At a pointed facility such as Gemini or Keck, a principal investigator (PI) proposes for time to answer a specific question; data volumes are modest, and the PI downloads the resulting dataset to analyse locally. 
-LSST has no PI-driven programs. 
+At a pointed facility such as Gemini or Keck, a principal investigator (PI) proposes for time to answer a specific question; data volumes are modest, and the PI downloads the resulting dataset to analyse locally.
+LSST has no PI-driven programs.
 The sky is imaged according to a survey strategy developed with the global scientific community~\cite{PSTN-055}, and observations are selected in
 real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
 Roughly every 30~s, the FBS ingests telemetry on the observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage. 
@@ -21,9 +21,12 @@ Likewise, science ranging from near-Earth asteroids and interstellar visitors in
 Processing runs automatically across three international data facilities, and scientists access the results through the Rubin Science Platform (RSP), bringing their analysis to the data rather than downloading it.
 In these respects, Rubin has more in common with an LHC experiment than with pointed astronomy.
 
-Recognising this, Rubin looked to established HEP tools, including Rucio~\cite{2019CSBS....3...11B}, PanDA~\cite{2024EPJWC.29504026K}, HTCondor and CernVM-FS~\cite{2011JPhCS.331d2003B}, rather than building astronomy-specific infrastructure from scratch.
-The choice was also a practical one: all three Rubin data facilities are Worldwide LHC Computing Grid (WLCG) sites.
-SLAC National Accelerator Laboratory (USDF), the lead Rubin data facility and archive centre is an ATLAS Tier-2 site, the French facility (FrDF) (CC-IN2P3, an LHC Tier-1 centre) and the UK facility (UKDF) (RAL, an LHC Tier-1 centre, together with the GridPP Tier-2 site at Lancaster) are long-standing WLCG centres, each with operational experience of these tools and the networks needed for petabyte-scale data movement.
+Recognising this, Rubin looked to established HEP tools, including Rucio~\cite[][]{2019CSBS....3...11B}, PanDA~\cite{2024EPJWC.29504026K}, HTCondor and CernVM-FS~\cite{2011JPhCS.331d2003B}, rather than building astronomy-specific infrastructure from scratch.
+The choice was also a practical one: all three Rubin data facilities are established Worldwide LHC Computing Grid (WLCG) sites.
+The U.S. Data Facility (USDF) at SLAC National Accelerator Laboratory, the lead Rubin data facility and archive centre, is an ATLAS Tier-2 site.
+The France Data Facility (FrDF) at CC-IN2P3 and the UK Data Facility (UKDF) at RAL are both LHC Tier-1 centres, with the UKDF also including the GridPP LHC Tier-2 site at Lancaster.
+Each brings operational experience with these tools and the networks needed for petabyte-scale data movement.
+
 During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP) for the full LSST, starting with Data Release 1 (DR1), expected in 2028.
 Rubin has drawn on more than a decade of HEP operational experience at petabyte scale, and in turn is extending these tools to new storage paradigms and computing environments.
 
@@ -36,16 +39,15 @@ This paper describes the end-to-end Rubin computing ecosystem as it stands at th
 
 Rubin Observatory is a dedicated survey facility, jointly funded by the US National Science Foundation and the US Department of Energy Office of Science, on Cerro~Pach\'{o}n in northern Chile.
 The 2647~m site offers dark, dry and stable skies, more than 300 clear nights per year, and access to the Galactic centre and the Magellanic Clouds.
-The scientific vision behind Rubin Observatory and the LSST was pioneered by J.\ Anthony Tyson (UC Davis), who proposed the Dark Matter Telescope~\cite{2001ASPC..237..417T}, a wide-area survey to map dark matter and explore the time-domain Universe.
+
+The scientific vision behind Rubin Observatory and the LSST was pioneered by J.\ Anthony Tyson (UC Davis), who proposed the Dark Matter Telescope~\cite[][]{2001ASPC..237..417T}, a wide-area survey to map dark matter and explore the time-domain Universe.
 Such a survey requires a large aperture, a very wide field of view, and the agility to move rapidly between fields.
 Correcting spherical aberration, coma, and astigmatism over a wide field requires three mirrors, but classical three-mirror designs spread the mirrors far apart, giving a long, slow structure.
 Roger Angel (University of Arizona) recognised that the primary (M1) and tertiary (M3) mirrors could be cast and polished from a single borosilicate blank.
 This keeps the 8.4~m, $\sim$300-tonne Simonyi Survey Telescope~\cite{2024SPIE13094E..09S} short and stiff, so that it can slew $3.5^\circ$ and settle in about 4~s before the next 30~s exposure, revisiting the visible sky every 3--4 nights.
-%
+The 3.2-gigapixel LSST Camera (LSSTCam)~\cite[][]{2024SPIE13096E..1SR,2024SPIE13096E..1OL}, the largest digital camera ever built, covers 9.6~deg$^2$ per exposure, about 45 times the area of the full Moon, through six broad-band filters ($ugrizy$, 320--1050~nm).
 
-The 3.2-gigapixel LSST Camera (LSSTCam)~\cite{2024SPIE13096E..1OL,2024SPIE13096E..1SR}, the largest digital camera ever built, covers 9.6~deg$^2$ per exposure, about 45 times the area of the full Moon, through six broad-band filters ($ugrizy$, 320--1050~nm).
-
-Together, the telescope and camera give Rubin an \'etendue\footnote{The product of effective collecting area and field of view.} of 319~m$^2$\,deg$^2$~\cite{2019ApJ...873..111I}, the largest of any optical survey facility built to date.
+Together, the telescope and camera give Rubin an \'etendue\footnote{The product of effective collecting area and field of view.} of 319~m$^2$\,deg$^2$, the largest of any optical survey facility built to date.
 \'Etendue is the survey-astronomy equivalent of instantaneous luminosity in collider physics: it sets the rate at which a facility accumulates data, and hence how quickly rare events become statistically accessible.
 The compact M1M3 design is central to this survey power: keeping the 300-tonne structure short and stiff delivers both the large collecting area and the 4~s slew-and-settle cycle that together sustain the cadence.
 
@@ -62,7 +64,7 @@ Over ten years, LSST is expected to detect $\sim$20~billion galaxies, $\sim$17~b
 The instrument and cadence are optimised for all four pillars together rather than for any one programme, and the survey and DMS deliver a single dataset that serves them all, just as one ATLAS or CMS dataset serves studies of the Higgs boson, QCD, dark matter, flavour physics and electroweak precision.
 
 The baseline survey~\cite{PSTN-055}, shown in figure~\ref{fig:survey-map}, devotes $\sim$80--90\% of the time to the Wide-Fast-Deep (WFD) survey, covering $\sim$18\,000~deg$^2$ with $\sim$800 visits per pointing to a coadded depth of $r\sim27.5$.
-Five Deep Drilling Fields take $\sim$7\% and reach $r\sim28$; mini- and micro-surveys ($\sim$1--10\%) cover the northern ecliptic, the Galactic plane and other specialised regions; and $\sim$3\% is reserved for Target of Opportunity follow-up~\cite{RTN-098} of gravitational-wave and high-energy neutrino events.
+Five Deep Drilling Fields take $\sim$7\% and reach $r\sim28$; mini- and micro-surveys ($\sim$1--10\%) cover the northern ecliptic, the Galactic plane and other specialised regions; and $\sim$3\% is reserved for Target of Opportunity follow-up of gravitational-wave and high-energy neutrino events.
 Localisation regions of tens to hundreds of square degrees must be searched within hours to catch a fading kilonova, and Rubin's combination of wide field and depth makes it uniquely suited to finding these faint, rapidly evolving optical counterparts.
 
 LSST data is used by $\sim$7500 scientists in $\sim$30 countries, organised into eight Science Collaborations\footnote{\url{https://rubinobservatory.org/for-scientists/science-collaborations}} supported by the LSST Discovery Alliance\footnote{\url{https://lsstdiscoveryalliance.org}}.
@@ -118,7 +120,7 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 \end{figure}
 
 Before the first LSST Data Release, commissioning data reach the community through Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
-Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam data, the first real Rubin data, and Data Preview 2 (DP2)~\cite{ RTN-115}, released on 27~July~2026 and processed entirely at the USDF, covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS precovery images\footnote{\url{https://dp2.lsst.io}}.
+Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam data, the first real Rubin data, and Data Preview 2 (DP2)~\cite{RTN-115}, released on 27~July~2026 and processed entirely at the USDF, covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS precovery images\footnote{\url{https://dp2.lsst.io}}.
 
 % ============================================================
 \section{The Rubin Data Management System}
@@ -150,12 +152,13 @@ The central engineering challenge is a mismatch of abstraction: the Butler~\cite
 \label{sec:facilities}
 % ============================================================
 %
-Dedicated long-haul links carry each exposure from the summit to the USDF at SLAC within seconds of readout, with a three-day summit buffer protecting against network outages (Figure~\ref{fig:network}).
 Annual DRP is divided across the three facilities~\cite{2024EPJWC.29501042H,2025EPJWC.33701234H}: the USDF (35\%), which hosts the archive and is the only site running Prompt Processing; the FrDF (40\%), which holds a full copy of the raw data; and the UKDF (25\%), which holds only the raw data for its assigned sky region plus the adjacent patches needed at boundaries.
 CC-IN2P3 and the UK facility are long-standing WLCG sites, so the infrastructure, expertise and staff experience needed to run HEP tools are already in place.
 
-Inter-site connectivity is provided by ESnet, G\'{E}ANT, JANET and RENATER, with transatlantic round-trip times of up to $\sim$165~ms.
-Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night compressed); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003, RTN-104}) that host published data products.
+Dedicated long-haul links carry each exposure from the summit to the USDF at SLAC within seconds of readout, with a three-day summit buffer protecting against network outages (Figure~\ref{fig:network}).
+REUNA and AMLight carry the data from the summit to Miami; ESnet, G\'{E}ANT, JANET and RENATER provide inter-site connectivity, with transatlantic round-trip times of up to $\sim$165~ms.
+
+Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night compressed); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003}) that host published data products.
 %
 \begin{figure}[h]
 \centering
@@ -180,8 +183,10 @@ The summit is connected to SLAC by a 100/40~Gbps primary/backup long-haul link w
 Each exposure must reach the USDF within $\sim$7~s so that Prompt Processing can finish within its 120~s budget; a new exposure follows every $\sim$35--40~s.
 Transfer is handled by \texttt{s3nd} (Deliverator), a small custom Go daemon that writes all 205 sensor files in parallel to an S3-compatible object store at the USDF, keeping a pool of persistent connections open to avoid the TLS handshake and TCP slow-start cost on every file over a high-latency international link.
 A listener at the USDF watches the bucket, triggers Butler ingestion, and launches Prompt Processing as each exposure arrives.
-In early operations, 80\% of exposures arrive within 7~s; the tail stems from several causes, including network failover, camera retransmission, and queueing at the shared USDF object store.
+In early operations, 90\% of exposures arrive within 7~s; the tail stems from several causes, including network failover, camera retransmission, and queueing at the shared USDF object store.
 Telemetry from the Engineering Facility Database (EFD) is transferred as messages via Sasquatch~\cite{2024SPIE13101E..1MF}, a Kafka-based system, and certified calibration products are returned from the archive to the summit via rsync at $\mathcal{O}(100)$~GB~day$^{-1}$.
+The transport of EFD and other payloads from the Summit to the USDF uses the LHN but is not encrypted.
+Only pixel data is transmitted through the IPsec channels.
 
 % ============================================================
 \subsection{Science Pipelines, Middleware, and Workflow Orchestration}
@@ -248,7 +253,9 @@ Once the pull request is accepted, Rubin will retire HermesK and run the standar
 % ============================================================
 
 Each annual release will be distributed from the USDF archive to 15--20 IDACs~\cite{2024EPJWC.29507017M} across the Americas, Europe and the Asia-Pacific region.
-An IDAC needs only a storage endpoint compatible with Rucio and FTS; orchestration is managed centrally at the USDF, which prevents simultaneous downloads from congesting the archive, and transfers can also run between IDACs.
+An IDAC needs only a storage endpoint compatible with Rucio and FTS.
+Transfer orchestration is managed centrally at the USDF complemented by regional distribution hubs (e.g. CC-IN2P3 for some European IDACs), which prevents simultaneous downloads from congesting the archive.
+Transfers can also run directly between IDACs.
 DP1 (3.5~TB) was distributed to 9 IDACs in this way, with Globus used for NERSC~\cite{2026AJ....171..360V,RTN-086}, and the same infrastructure is being scaled to DP2 ($\mathcal{O}(100)$~TB) and to petabyte-scale Data Releases.
 Scientists access the data through the Rubin Science Platform~\cite{2024SPIE13101E..2BO}, where, as in HEP, they bring their analysis to the data rather than downloading it.
 
@@ -267,9 +274,10 @@ All three Rubin data facilities already operated these tools for the LHC (\S\ref
 The principal challenge is the file-count regime.
 In HEP, events are aggregated into multi-GB files, so per-file overheads are small relative to the data volume.
 In Rubin, the natural unit is the detector image: each visit comprises 189 science detectors processed independently, and every pipeline quantum writes its outputs (images, catalogs, metadata, logs and provenance) as separate Butler-tracked files.
-File counts therefore reach billions per Data Release, many in the KB to few-MB range, a regime in which the file-oriented HEP tools struggle.
-Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products, and returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
-S3 object storage at the USDF avoids POSIX inode limits, but bridging it to POSIX storage at the European facilities remains an active engineering problem; more broadly, object storage combined with a science-metadata layer such as the Butler is a concrete alternative for any workload, in astronomy or HEP, that produces many small outputs.
+File counts therefore reach billions per Data Release, many in the KB to few-MB range, a regime in which file-oriented HEP tools struggle.
+At the USDF, S3 object storage removes the filesystem metadata bottleneck that large numbers of files impose on POSIX systems, but transfer to WebDAV storage at the European facilities remains an active engineering problem.
+Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products.
+Returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
 
 The second challenge is keeping the Butler's dataset model consistent with the file-oriented tools across three independent sites, and it is directly connected to the small-file problem: both difficulties trace back to having two independent systems that each record where a file resides.
 Each site's Butler registry knows only about locally present files.
