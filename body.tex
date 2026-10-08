@@ -4,30 +4,30 @@
 % ============================================================
 
 On 30~June~2026, the NSF--DOE Vera C.\ Rubin Observatory began the Legacy Survey of Space and Time (LSST), a ten-year, wide-field optical survey of the southern sky that will produce the deepest and most complete time-domain map of the Universe to date. 
-The observatory was named by Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman.
+The observatory was named by an Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman.
 
 Rubin works very differently from a traditional observatory. 
 At a pointed facility such as Gemini or Keck, a principal investigator (PI) proposes for time to answer a specific question; data volumes are modest, and the PI downloads the resulting dataset to analyse locally.
-LSST has no PI-driven programs.
-The sky is imaged according to a survey strategy developed with the global scientific community~\cite{PSTN-055}, and observations are selected in
-real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
-Roughly every 30~s, the FBS ingests telemetry on the observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage. 
-Each night, Rubin takes $\sim$700 science exposures, producing $\sim$10~TB of raw images (uncompressed) and up to 10~million transient alerts, issued within 120~s of shutter close.
-Separately, all images acquired to date are reprocessed approximately annually into a single dataset, released as a Data Release, that enables multiple independent science programs across a global community of $\sim$7500 scientists.
+Rubin Observatory has no PI-driven programs.
+The LSST, Rubin's primary mission, images the sky following an observing strategy developed with  the global scientific community~\cite{PSTN-055}.
+Observations are selected in  real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
+Roughly every 30~s, the FBS ingests telemetry on the Observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage.
+Each night, Rubin takes $\sim$700 science exposures, producing $\sim$10~TB of raw images (uncompressed) and up to 10~million transient alerts, which are issued within 120~s of shutter close.
+Separately, all images acquired up to a cut-off date are reprocessed approximately annually into a Data Release (DR), a uniformly processed dataset that that supports independent science programs across a global community of $\sim$7500 scientists.
 
 To the high-energy physics (HEP) community, this picture is familiar.
- A large LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces a common dataset shared by the whole collaboration: the same data underpin Higgs measurements, B-physics, top-quark properties and searches for physics beyond the Standard Model. 
-Likewise, science ranging from near-Earth asteroids and interstellar visitors in the Solar System, through variable stars, supernovae and active galactic nuclei, to galaxy evolution, dark energy and dark matter is served by the same LSST images and catalogs~\cite{2019ApJ...873..111I}.
+% , much as one ATLAS or CMS dataset serves an experiment's entire physics program.
+An LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces one dataset shared by the whole collaboration, underpinning Higgs measurements, B-physics, top-quark studies and searches for new physics.
+Likewise, the same LSST images and catalogs serve science from near-Earth asteroids and interstellar objects through variable stars, supernovae and AGN to galaxy evolution, dark energy and dark matter~\cite{2019ApJ...873..111I}.
 Processing runs automatically across three international data facilities, and scientists access the results through the Rubin Science Platform (RSP), bringing their analysis to the data rather than downloading it.
 In these respects, Rubin has more in common with an LHC experiment than with pointed astronomy.
 
 Recognising this, Rubin looked to established HEP tools, including Rucio~\cite[][]{2019CSBS....3...11B}, PanDA~\cite{2024EPJWC.29504026K}, HTCondor and CernVM-FS~\cite{2011JPhCS.331d2003B}, rather than building astronomy-specific infrastructure from scratch.
 The choice was also a practical one: all three Rubin data facilities are established Worldwide LHC Computing Grid (WLCG) sites.
-The U.S. Data Facility (USDF) at SLAC National Accelerator Laboratory, the lead Rubin data facility and archive centre, is an ATLAS Tier-2 site.
+The U.S. Data Facility (USDF) at the SLAC National Accelerator Laboratory, the lead Rubin data facility and archive centre, is an ATLAS Tier-2 site.
 The France Data Facility (FrDF) at CC-IN2P3 and the UK Data Facility (UKDF) at RAL are both LHC Tier-1 centres, with the UKDF also including the GridPP LHC Tier-2 site at Lancaster.
 Each brings operational experience with these tools and the networks needed for petabyte-scale data movement.
-
-During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP) for the full LSST, starting with Data Release 1 (DR1), expected in 2028.
+During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP) for the full LSST, starting with Data Release 1 (DR1), expected in late 2028.
 Rubin has drawn on more than a decade of HEP operational experience at petabyte scale, and in turn is extending these tools to new storage paradigms and computing environments.
 
 This paper describes the end-to-end Rubin computing ecosystem as it stands at the start of LSST operations, highlights early scientific results, and discusses lessons learned and open challenges for modern high-volume, high-rate astronomical surveys.
@@ -42,17 +42,16 @@ The 2647~m site offers dark, dry and stable skies, more than 300 clear nights pe
 
 The scientific vision behind Rubin Observatory and the LSST was pioneered by J.\ Anthony Tyson (UC Davis), who proposed the Dark Matter Telescope~\cite[][]{2001ASPC..237..417T}, a wide-area survey to map dark matter and explore the time-domain Universe.
 Such a survey requires a large aperture, a very wide field of view, and the agility to move rapidly between fields.
-Correcting spherical aberration, coma, and astigmatism over a wide field requires three mirrors, but classical three-mirror designs spread the mirrors far apart, giving a long, slow structure.
-Roger Angel (University of Arizona) recognised that the primary (M1) and tertiary (M3) mirrors could be cast and polished from a single borosilicate blank.
-This keeps the 8.4~m, $\sim$300-tonne Simonyi Survey Telescope~\cite{2024SPIE13094E..09S} short and stiff, so that it can slew $3.5^\circ$ and settle in about 4~s before the next 30~s exposure, revisiting the visible sky every 3--4 nights.
-The 3.2-gigapixel LSST Camera (LSSTCam)~\cite[][]{2024SPIE13096E..1SR,2024SPIE13096E..1OL}, the largest digital camera ever built, covers 9.6~deg$^2$ per exposure, about 45 times the area of the full Moon, through six broad-band filters ($ugrizy$, 320--1050~nm).
+Correcting optical aberations over a wide field requires three mirrors, which classical designs place far apart, giving a long, slow structure.
+Roger Angel (University of Arizona) recognized that the primary (M1) and tertiary (M3) mirrors could be cast and polished from a single borosilicate monolith, making the 8.4~m, $\sim$300-tonne Simonyi Survey Telescope~\cite{2024SPIE13094E..09S} short and stiff enough to slew $3.5^\circ$ and settle in about 4~s between 30~s exposures, thus enabling the visible sky to be revisited every 3--4 nights.
+The 3.2-gigapixel LSST Camera (LSSTCam)~\cite{2024SPIE13096E..1SR,2024SPIE13096E..1OL}, the largest digital camera ever built, images 9.6~deg$^2$ (about 45 full Moons) per exposure, through six broad-band filters ($ugrizy$, 320--1050~nm).
 
-Together, the telescope and camera give Rubin an \'etendue\footnote{The product of effective collecting area and field of view.} of 319~m$^2$\,deg$^2$, the largest of any optical survey facility built to date.
-\'Etendue is the survey-astronomy equivalent of instantaneous luminosity in collider physics: it sets the rate at which a facility accumulates data, and hence how quickly rare events become statistically accessible.
-The compact M1M3 design is central to this survey power: keeping the 300-tonne structure short and stiff delivers both the large collecting area and the 4~s slew-and-settle cycle that together sustain the cadence.
+Together, the telescope and camera give Rubin an \'etendue (effective collecting area and field of view) of 319~m$^2$\,deg$^2$, the largest of any optical survey facility built to date.
+\'Etendue is the survey-astronomy analog of instantaneous luminosity in collider physics: it sets the rate at which sky area is covered to a given depth, and hence how quickly rare events become statistically accessible.
+The 4~s slew-and-settle cycle keeps overheads small, so most of this \'etendue goes into collecting photons rather than moving between fields.
 
-The Data Management System (\S\ref{sec:ecosystem}) turns the resulting data stream into a single science-ready dataset that serves all of the science described in \S\ref{sec:survey}, much as one ATLAS or CMS dataset serves an experiment's entire physics program.
-Rubin also runs a dedicated Education and Public Outreach program~\cite{2014SPIE9150E..14B}, whose Rubin Sky Viewer\footnote{\url{https://skyviewer.rubinobservatory.org}} gives anyone full-resolution, interactive access to Rubin images in a web browser.
+The Data Management System (\S\ref{sec:ecosystem}) turns this data stream into science-ready data-products that serve the science described in \S\ref{sec:survey}.
+Rubin's Education and Public Outreach program~\cite{2014SPIE9150E..14B}, provides the Sky Viewer\footnote{\url{https://skyviewer.rubinobservatory.org}}, which gives anyone interactive, full-resolution access to Rubin images in a web browser.
 
 % ============================================================
 \section{The Legacy Survey of Space and Time}
