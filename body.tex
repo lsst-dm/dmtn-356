@@ -233,8 +233,8 @@ Kafka was chosen over ActiveMQ, which Hermes already supports, because Kafka's M
 
 % Update status before submission
 HermesK is an interim solution.
-A pull request under review adds generic Kafka messaging to the upstream Hermes daemon, analogous to its existing ActiveMQ support, while the Rubin-specific event filtering has moved into a separate, completed daemon, \texttt{ctrl\_filterd}.
-Once the pull request is accepted, Rubin will retire HermesK and run the standard Hermes daemon with Kafka, removing the need to patch each Rucio release.
+We have submitted a pull request that adds generic Kafka messaging to the Hermes daemon, analogous to its existing ActiveMQ support.
+After the pull request is merged, the Rubin-specific event filtering will be handled by a new daemon, \texttt{ctrl\_filterd}.
 %
 \begin{figure}[t]
 \centering
