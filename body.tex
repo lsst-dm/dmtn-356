@@ -4,12 +4,12 @@
 % ============================================================
 
 On 30~June~2026, the NSF--DOE Vera C.\ Rubin Observatory began the Legacy Survey of Space and Time (LSST), a ten-year, wide-field optical survey of the southern sky that will produce the deepest and most complete time-domain map of the Universe to date. 
-The observatory was named by an Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman.
+The observatory was named by an Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman \citep[][]{1970ApJ...159..379R, 1980ApJ...238..471R}.
 
 Rubin works very differently from a traditional observatory. 
 At a pointed facility such as Gemini or Keck, a principal investigator (PI) proposes for time to answer a specific question; data volumes are modest, and the PI downloads the resulting dataset to analyse locally.
 Rubin Observatory has no PI-driven programs.
-The LSST, Rubin's primary mission, images the sky following an observing strategy developed with  the global scientific community~\cite{PSTN-055}.
+The LSST, Rubin's primary mission, images the sky following an observing strategy developed with the science community~\cite{PSTN-055}.
 Observations are selected in  real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
 Roughly every 30~s, the FBS ingests telemetry on the Observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage.
 Each night, Rubin takes $\sim$700 science exposures, producing $\sim$10~TB of raw images (uncompressed) and up to 10~million transient alerts, which are issued within 120~s of shutter close.
@@ -17,8 +17,11 @@ Separately, all images acquired up to a cut-off date are reprocessed approximate
 
 To the high-energy physics (HEP) community, this picture is familiar.
 % , much as one ATLAS or CMS dataset serves an experiment's entire physics program.
-An LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces one dataset shared by the whole collaboration, underpinning Higgs measurements, B-physics, top-quark studies and searches for new physics.
-Likewise, the same LSST images and catalogs serve science from near-Earth asteroids and interstellar objects through variable stars, supernovae and AGN to galaxy evolution, dark energy and dark matter~\cite{2019ApJ...873..111I}.
+An LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces one dataset shared by the whole collaboration, underpinning Higgs measurements, B-physics, top-quark studies, and searches for new physics.
+Likewise, one LSST dataset serves Solar System, Galactic, and extragalactic science, and the unanticipated ~\cite{2019ApJ...873..111I}.
+% LSST images and catalogs serve science from near-Earth asteroids and interstellar objects
+% through variable stars, supernovae,
+% % to galaxy evolution, dark energy and dark matter
 Processing runs automatically across three international data facilities, and scientists access the results through the Rubin Science Platform (RSP), bringing their analysis to the data rather than downloading it.
 In these respects, Rubin has more in common with an LHC experiment than with pointed astronomy.
 
@@ -27,7 +30,7 @@ The choice was also a practical one: all three Rubin data facilities are establi
 The U.S. Data Facility (USDF) at the SLAC National Accelerator Laboratory, the lead Rubin data facility and archive centre, is an ATLAS Tier-2 site.
 The France Data Facility (FrDF) at CC-IN2P3 and the UK Data Facility (UKDF) at RAL are both LHC Tier-1 centres, with the UKDF also including the GridPP LHC Tier-2 site at Lancaster.
 Each brings operational experience with these tools and the networks needed for petabyte-scale data movement.
-During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP) for the full LSST, starting with Data Release 1 (DR1), expected in late 2028.
+During commissioning and early operations, these tools are being evaluated for multi-site Data Release Processing (DRP), starting with Data Release 1 (DR1), expected in late 2028.
 Rubin has drawn on more than a decade of HEP operational experience at petabyte scale, and in turn is extending these tools to new storage paradigms and computing environments.
 
 % ============================================================
@@ -43,21 +46,21 @@ Such a survey requires a large aperture, a very wide field of view, and the agil
 Correcting optical aberations over a wide field requires three mirrors, which classical designs place far apart, giving a long, slow structure.
 Roger Angel (University of Arizona) recognized that the primary (M1) and tertiary (M3) mirrors could be cast and polished from a single borosilicate monolith, making the 8.4~m, $\sim$300-tonne Simonyi Survey Telescope~\cite{2024SPIE13094E..09S} short and stiff enough to slew $3.5^\circ$ and settle in about 4~s between 30~s exposures, thus enabling the visible sky to be revisited every 3--4 nights.
 The 3.2-gigapixel LSST Camera (LSSTCam)~\cite{2024SPIE13096E..1SR,2024SPIE13096E..1OL}, the largest digital camera ever built, images 9.6~deg$^2$ (about 45 full Moons) per exposure, through six broad-band filters ($ugrizy$, 320--1050~nm).
-Together, the telescope and camera give Rubin an \'etendue (effective collecting area and field of view) of 319~m$^2$\,deg$^2$, the largest of any optical survey facility built to date.
+Together, the telescope and camera give Rubin an \'etendue (effective collecting area\,$\times$\,field of view) of 319~m$^2$\,deg$^2$, the largest of any optical survey facility built to date.
 \'Etendue is the survey-astronomy analog of instantaneous luminosity in collider physics: it sets the rate at which sky area is covered to a given depth, and hence how quickly rare events become statistically accessible.
 % The 4~s slew-and-settle cycle keeps overheads small, so most of this \'etendue goes into collecting photons rather than moving between fields.
 
-The Data Management System (\S\ref{sec:ecosystem}) turns this data stream into science-ready data-products that serve the science described in \S\ref{sec:survey}.
-Rubin's Education and Public Outreach program~\cite{2014SPIE9150E..14B}, provides the Sky Viewer\footnote{\url{https://skyviewer.rubinobservatory.org}}, which gives anyone interactive, full-resolution access to Rubin images in a web browser.
+The Data Management System (DMS; \S\ref{sec:ecosystem}) turns this data stream into science-ready data products.
+The Education and Public Outreach (EPO)  program~\cite{2014SPIE9150E..14B} provides the Sky Viewer\footnote{\url{https://skyviewer.rubinobservatory.org}}, giving anyone interactive, full-resolution access to Rubin images in a web browser.
 
 % ============================================================
 \section{The Legacy Survey of Space and Time}
 \label{sec:survey}
 % ============================================================
 %
-LSST is built around four science pillars, chosen specifically because they place complementary demands on depth, area, cadence and alert latency: probing dark energy and dark matter, taking an inventory of the Solar System, exploring the transient optical sky, and mapping the Milky Way~\cite{2019ApJ...873..111I}.
-Over ten years, LSST is expected to detect $\sim$20~billion galaxies, $\sim$17~billion stars and $\sim$6~million Solar System objects.
-The instrument and cadence are optimised for all four pillars together rather than for any one programme, and the survey and DMS deliver a single dataset that serves them all, just as one ATLAS or CMS dataset serves studies of the Higgs boson, QCD, dark matter, flavour physics and electroweak precision.
+The LSST is designed around four science pillars, chosen specifically because they place complementary demands on depth, area, cadence and alert latency: probing dark energy and dark matter, taking an inventory of the Solar System, exploring the transient optical sky, and mapping the Milky Way~\cite{2019ApJ...873..111I}.
+Over ten years, the LSST is expected to detect $\sim$20~billion galaxies, $\sim$17~billion stars and $\sim$6~million Solar System objects.
+The instrument and cadence are optimised for all four pillars together rather than for any one program, and the survey and DMS deliver a single dataset that serves them all, just as one ATLAS or CMS dataset serves studies of the Higgs boson, QCD, dark matter, flavour physics and electroweak precision.
 
 The baseline survey~\cite{PSTN-055}, shown in figure~\ref{fig:survey-map}, devotes $\sim$80--90\% of the time to the Wide-Fast-Deep (WFD) survey, covering $\sim$18\,000~deg$^2$ with $\sim$800 visits per pointing to a coadded depth of $r\sim27.5$.
 Five Deep Drilling Fields take $\sim$7\% and reach $r\sim28$; mini- and micro-surveys ($\sim$1--10\%) cover the northern ecliptic, the Galactic plane and other specialised regions; and $\sim$3\% is reserved for Target of Opportunity follow-up of gravitational-wave and high-energy neutrino events.
@@ -80,11 +83,10 @@ The wide-fast-deep main survey covers $\sim$18\,000~sq~deg of the southern sky; 
 
 LSSTCam saw first photons on 15~April~2025, and on 23~June~2025 Rubin released its first public images in the ``First Look'' campaign, designed to showcase Rubin's unique combination of wide field, depth and speed.
 Both First Look images were processed with the LSST Science Pipelines (\S\ref{sec:pipelines}), making them a commissioning exercise as well as a scientific demonstration.
-The first combines 678 exposures of the Trifid and Lagoon Nebulae, taken over just 7.2~hours, into a $\sim$5-gigapixel mosaic (Figure~\ref{fig:trifid}), showing how quickly Rubin builds depth: faint gas and dust in a crowded Galactic field, revealed in a single night.
-The second, the ``Cosmic Treasure Chest'', combines 1185 exposures of $\sim$25~deg$^2$ of the southern Virgo Cluster taken over seven nights
-% (Figure~\ref{fig:treasure})
-and illustrates the combination of area and depth: $\sim$10~million  galaxies, from bright cluster members to faint, distant background  galaxies, in a region only a few times the camera's field of view.
-At $\sim$98\,000$\times$52\,000 pixels, the released mosaic would need  roughly 600 4K displays to be shown at full resolution, so it is best explored with the interactive Rubin Skyviewer\footnote{\url{https://skyviewer.app}}.
+Figure~\ref{fig:trifid} shows the Trifid and Lagoon Nebulae: 678 exposures taken over 7.2~hours, combined into a $\sim$5-gigapixel mosaic that reveals faint gas and dust in a crowded Galactic field in a single night.
+
+The ``Cosmic Treasure Chest'' illustrates the combination of area and depth: 1185 exposures of $\sim$25~deg$^2$ of the southern Virgo Cluster, taken over seven nights, capture $\sim$10~million galaxies, from bright cluster members to faint, distant background sources, in a region only a few times the camera's field of view.
+At $\sim$98\,000$\times$52\,000 pixels, this mosaic would need roughly 600 4K displays to show at full resolution; we invite readers to explore it in the interactive Rubin Skyviewer\footnote{\url{https://skyviewer.app}}.
 %
 \begin{figure}[htb]
 \centering
@@ -105,19 +107,23 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 The same commissioning data are already producing discoveries.
 The First Look observations alone yielded 1\,514 new asteroids, and a further $\sim$11\,000, including $\sim$380 trans-Neptunian objects, were found in the commissioning surveys of mid-2025.
 Rubin also observed its first interstellar object before the survey began: LSSTCam images from the Science Validation survey contain detections of 3I/ATLAS (C/2025~N1)~\cite{2026ApJ..1001L..35C}, only the third interstellar object known, taken ten days before ATLAS discovered it on 1~July~2025 (Figure~\ref{fig:3IATLAS}).
-With the moving-object pipelines not yet active, the detections were recovered retrospectively once the orbit was known, illustrating a general strength of wide-field surveys: repeated imaging records rare objects before their nature is recognised.
+% With the moving-object pipelines not yet active,
+The detections were recovered retrospectively once the orbit was known, illustrating a general strength of wide-field surveys: repeated imaging records rare objects before their nature is recognised.
 %
 \begin{figure}[t]
 \includegraphics[width=\columnwidth,clip]{3I_ATLAS_rubin_panels}
 \caption{LSSTCam images of 3I/ATLAS on 21~June 2025 (10 days before discovery, object marked), and 2, 3 and 19~July 2025 (1, 2 and 18 days after discovery).
-The 21~June image is a precovery detection~\cite{2026ApJ..1001L..35C}.
+The 21~June image is a pre-discovery detection~\cite{2026ApJ..1001L..35C}.
 Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 \label{fig:3IATLAS}
 \end{figure}
 
-Before the first LSST Data Release, commissioning data reach the community through Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
-Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released 3.5~TB of LSSTComCam data, the first real Rubin data, and Data Preview 2 (DP2)~\cite{RTN-115}, released on 27~July~2026 and processed entirely at the USDF, covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS precovery images\footnote{\url{https://dp2.lsst.io}}.
-
+Commissioning data are released as Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
+Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released $\sim$\,3.5~TB of data acquired with the smaller nine-sensor LSST Commissioning Camera (LSSTComCam).
+% the first real Rubin data, and
+Data Preview 2 (DP2)~\cite{RTN-115}, released on 27~July~2026 covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS images\footnote{\url{https://dp2.lsst.io}}.
+Both were processed entirely at the USDF.
+%
 % ============================================================
 \section{The Rubin Data Management System}
 \label{sec:ecosystem}
