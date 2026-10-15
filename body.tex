@@ -7,22 +7,18 @@ On 30~June~2026, the NSF--DOE Vera C.\ Rubin Observatory began the Legacy Survey
 The observatory was named by an Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman \citep[][]{1970ApJ...159..379R, 1980ApJ...238..471R}.
 
 Rubin works very differently from a traditional observatory. 
-At a pointed facility such as Gemini or Keck, a principal investigator (PI) proposes for time to answer a specific question; data volumes are modest, and the PI downloads the resulting dataset to analyse locally.
-Rubin Observatory has no PI-driven programs.
-The LSST, Rubin's primary mission, images the sky following an observing strategy developed with the science community~\cite{PSTN-055}.
+At a pointed facility such as Gemini or Keck, a principal investigator proposes for observing time to answer a specific question; data volumes are modest, and the resulting dataset is typically downloaded to analyse locally.
+Rubin Observatory has no such proposal-driven programs.
+The LSST, Rubin's prime mission, images the sky following an observing strategy developed with the science community~\cite{PSTN-055}.
 Observations are selected in  real time by the Feature Based Scheduler (FBS), an automated decision-making system built on a Markov decision process framework~\cite{2026SPIE14151E..0XJ}.
 Roughly every 30~s, the FBS ingests telemetry on the Observatory, sky and weather, and selects the next pointing from about 1500 candidates by maximising a weighted reward that balances expected image depth, slew time and progress towards the desired footprint coverage.
 Each night, Rubin takes $\sim$700 science exposures, producing $\sim$10~TB of raw images (uncompressed) and up to 10~million transient alerts, which are issued within 120~s of shutter close.
-Separately, all images acquired up to a cut-off date are reprocessed approximately annually into a Data Release (DR), a uniformly processed dataset that supports independent science programs across a global community of $\sim$7500 scientists.
+Separately, all images acquired up to a cut-off date are reprocessed approximately annually into a Data Release (DR), a uniformly processed dataset that supports independent science programs across a global community of scientists.
 
 To the high-energy physics (HEP) community, this picture is familiar.
-% , much as one ATLAS or CMS dataset serves an experiment's entire physics program.
-An LHC experiment is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces one dataset shared by the whole collaboration, underpinning Higgs measurements, B-physics, top-quark studies, and searches for new physics.
-Likewise, one LSST dataset serves Solar System, Galactic, and extragalactic science, and the unanticipated ~\cite{2019ApJ...873..111I}.
-% LSST images and catalogs serve science from near-Earth asteroids and interstellar objects
-% through variable stars, supernovae,
-% % to galaxy evolution, dark energy and dark matter
-Processing runs automatically across three international data facilities, and scientists access the results through the Rubin Science Platform (RSP), bringing their analysis to the data rather than downloading it.
+An LHC experiment such as ATLAS or CMS is trigger-driven rather than proposal-driven, relies on fully automated reconstruction, and produces a single dataset shared by the whole collaboration, underpinning Higgs measurements, B-physics, top-quark studies, electroweak precision tests and searches for physics beyond the Standard Model.
+Likewise, a single LSST dataset serves studies of near-Earth asteroids, supernovae, weak gravitational lensing, stellar streams and galaxy evolution, as well as searches for phenomena not yet known to exist.
+Processing runs automatically across three international data facilities, and scientists access the results through the Rubin Science Platform (RSP), where, as in HEP, they bring their analysis to the data rather than downloading it.
 In these respects, Rubin has more in common with an LHC experiment than with pointed astronomy.
 
 Recognising this, Rubin looked to established HEP tools, including Rucio~\cite[][]{2019CSBS....3...11B}, PanDA~\cite{2024EPJWC.29504026K}, HTCondor and CernVM-FS~\cite{2011JPhCS.331d2003B}, rather than building astronomy-specific infrastructure from scratch.
@@ -60,7 +56,7 @@ The Education and Public Outreach (EPO)  program~\cite{2014SPIE9150E..14B} provi
 %
 The LSST is designed around four science pillars, chosen specifically because they place complementary demands on depth, area, cadence and alert latency: probing dark energy and dark matter, taking an inventory of the Solar System, exploring the transient optical sky, and mapping the Milky Way~\cite{2019ApJ...873..111I}.
 Over ten years, the LSST is expected to detect $\sim$20~billion galaxies, $\sim$17~billion stars and $\sim$6~million Solar System objects.
-The instrument and cadence are optimised for all four pillars together rather than for any one program, and the survey and DMS deliver a single dataset that serves them all, just as one ATLAS or CMS dataset serves studies of the Higgs boson, QCD, dark matter, flavour physics and electroweak precision.
+The instrument and cadence are optimised for all four pillars together rather than for any one program, and the survey and DMS deliver a single dataset that serves them all.
 
 The baseline survey~\cite{PSTN-055}, shown in figure~\ref{fig:survey-map}, devotes $\sim$80--90\% of the time to the Wide-Fast-Deep (WFD) survey, covering $\sim$18\,000~deg$^2$ with $\sim$800 visits per pointing to a coadded depth of $r\sim27.5$.
 Five Deep Drilling Fields take $\sim$7\% and reach $r\sim28$; mini- and micro-surveys ($\sim$1--10\%) cover the northern ecliptic, the Galactic plane and other specialised regions; and $\sim$3\% is reserved for Target of Opportunity follow-up of gravitational-wave and high-energy neutrino events.
@@ -72,7 +68,7 @@ LSST data is used by $\sim$7500 scientists in $\sim$30 countries, organised into
 \centering
 \includegraphics[width=0.85\columnwidth,clip]{baseline_v5.3.0_10yrs_nvisits_compact}
 \caption{The LSST baseline survey footprint on the sky.
-The wide-fast-deep main survey covers $\sim$18\,000~sq~deg of the southern sky; the five Deep Drilling Fields and supplementary mini-surveys are overlaid.}
+The wide-fast-deep main survey covers $\sim$18\,000~sq~deg of the sky; the five Deep Drilling Fields and supplementary mini-surveys are overlaid.}
 \label{fig:survey-map}
 \end{figure}
 
@@ -85,8 +81,8 @@ LSSTCam saw first photons on 15~April~2025, and on 23~June~2025 Rubin released i
 Both First Look images were processed with the LSST Science Pipelines (\S\ref{sec:pipelines}), making them a commissioning exercise as well as a scientific demonstration.
 Figure~\ref{fig:trifid} shows the Trifid and Lagoon Nebulae: 678 exposures taken over 7.2~hours, combined into a $\sim$5-gigapixel mosaic that reveals faint gas and dust in a crowded Galactic field in a single night.
 
-The ``Cosmic Treasure Chest'' illustrates the combination of area and depth: 1185 exposures of $\sim$25~deg$^2$ of the southern Virgo Cluster, taken over seven nights, capture $\sim$10~million galaxies, from bright cluster members to faint, distant background sources, in a region only a few times the camera's field of view.
-At $\sim$98\,000$\times$52\,000 pixels, this mosaic would need roughly 600 4K displays to show at full resolution; we invite readers to explore it in the interactive Rubin Skyviewer\footnote{\url{https://skyviewer.app}}.
+The ``Cosmic Treasure Chest'' illustrates Rubin's unique combination of area and depth: 1185 exposures of $\sim$25~deg$^2$ of the southern Virgo Cluster, taken over seven nights, capture $\sim$10~million galaxies, from bright cluster members to faint, distant background sources, in a region only a few times the camera's field of view.
+At $\sim$98\,000$\times$52\,000 pixels, this mosaic would need roughly 600 4K displays to show at full resolution; it can be explored interactivly in the Rubin Skyviewer\footnote{\url{https://skyviewer.app}}.
 %
 \begin{figure}[htb]
 \centering
@@ -105,7 +101,7 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 %\end{figure}
 
 The same commissioning data are already producing discoveries.
-The First Look observations alone yielded 1\,514 new asteroids, and a further $\sim$11\,000, including $\sim$380 trans-Neptunian objects, were found in the commissioning surveys of mid-2025.
+The First Look observations alone revealed 1\,514 new asteroids, and the mid-2025 commissioning surveys added $\sim$11\,000 more, including $\sim$380 trans-Neptunian objects.
 Rubin also observed its first interstellar object before the survey began: LSSTCam images from the Science Validation survey contain detections of 3I/ATLAS (C/2025~N1)~\cite{2026ApJ..1001L..35C}, only the third interstellar object known, taken ten days before ATLAS discovered it on 1~July~2025 (Figure~\ref{fig:3IATLAS}).
 % With the moving-object pipelines not yet active,
 The detections were recovered retrospectively once the orbit was known, illustrating a general strength of wide-field surveys: repeated imaging records rare objects before their nature is recognised.
@@ -121,7 +117,7 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 Commissioning data are released as Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
 Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released $\sim$\,3.5~TB of data acquired with the smaller nine-sensor LSST Commissioning Camera (LSSTComCam).
 % the first real Rubin data, and
-Data Preview 2 (DP2)~\cite{RTN-115}, released on 27~July~2026 covers LSSTCam observations from April~2025 to January~2026, including the First Look fields and the 3I/ATLAS images\footnote{\url{https://dp2.lsst.io}}.
+Data Preview 2 (DP2)~\cite{RTN-115}, released in two stages (catalogs and deep coadds on 27~July~2026, visit-level images in late 2026)  comprises $\sim$\,30,000 LSSTCam visits obtained between April~2025 to January~2026, including the First Look fields and the 3I/ATLAS images\footnote{\url{https://dp2.lsst.io}}.
 Both were processed entirely at the USDF.
 %
 % ============================================================
@@ -133,10 +129,11 @@ Rubin's Data Management System (DMS),
 %shown in figure~\ref{fig:photons_to_science},
 is designed to operate as an automated, end-to-end system with minimal human intervention.
 Each 30~s exposure is read out in 2~s as 205 sensor files (189 science, 8 wavefront and 8 guider), totalling $\sim$4~GB compressed ($\sim$8.2~GB uncompressed).
-The survey produces $\sim$10~TB of raw data per night (uncompressed), with processed products far larger; the final catalog alone is projected at $\sim$15~PB.
+Processed products are far larger than the raw input; the final catalog alone is projected at $\sim$15~PB.
 Data are processed in two complementary streams.
-\textit{Prompt Processing}~\cite{2026arXiv260319541F}, run nightly at the US Data Facility (USDF) only, is designed for speed, delivering data quickly enough to enable follow-up of transient and moving objects: each exposure is differenced against a template, and up to 10~million alerts per night distributed to seven community brokers\footnote{\url{https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers}} within 120~s, followed by catalogs within 24~h~\cite{DMTN-293} and images within 80~h.
-\textit{Data Release Processing} (DRP) is optimised for quality, for science that is not time-critical: approximately once a year, the full cumulative dataset is reprocessed with the latest pipelines, producing Data Releases that are successively deeper and more precise.
+\textit{Prompt Processing}~\cite{2026arXiv260319541F} is designed for speed to enable rapid follow-up of transient, variable and moving objects.
+Up to 10~million alerts per night are distributed to seven community brokers\footnote{\url{https://rubinobservatory.org/for-scientists/data-products/alerts-and-brokers}} within 120~s of shutter close, followed by catalogs within 24~h~\cite{DMTN-293} and images within 80~h.
+\textit{Data Release Processing} (DRP) is optimised for quality rather than latency, serving science that is not time-critical: each annual release reprocesses the full cumulative dataset with the latest pipelines, so successive Data Releases  are deeper and more precise.
 %
 %\begin{figure}[t]
 %\centering
@@ -146,21 +143,22 @@ Data are processed in two complementary streams.
 %\label{fig:photons_to_science}
 %\end{figure}
 
-Rubin's distributed computing layer started from the HEP tool stack (Rucio and FTS for data movement, CernVM-FS for software distribution, HTCondor for batch processing), because its data challenge resemble those of an LHC experiment (\S\ref{sec:intro}) and its data facilities already run these tools.
-The central engineering challenge is a mismatch of abstraction: the Butler~\cite{2022SPIE12189E..11J}, Rubin's data middleware, manages scientific \textit{datasets} identified by instrument, sky region and observation metadata, whereas these tools operate on files identified solely by pathname.
+Rubin's distributed computing layer started from the HEP tool stack (Rucio and FTS for data movement, CernVM-FS for software distribution, HTCondor for batch processing), because its data challenges resemble those of an LHC experiment (\S\ref{sec:intro}) and its data facilities already run these tools.
+The central engineering challenge is a mismatch of abstraction: the Butler~\cite{2022SPIE12189E..11J}, Rubin's data middleware, manages scientific \textit{datasets} identified by instrument, sky region and observation metadata, whereas these tools operate on files identified by name or path.
 
 % ============================================================
 \subsection{The Distributed Data Facility Network}
 \label{sec:facilities}
 % ============================================================
 %
-Annual DRP is divided across the three facilities~\cite{2024EPJWC.29501042H,2025EPJWC.33701234H}: the USDF (35\%), which hosts the archive and is the only site running Prompt Processing; the FrDF (40\%), which holds a full copy of the raw data; and the UKDF (25\%), which holds only the raw data for its assigned sky region plus the adjacent patches needed at boundaries.
-CC-IN2P3 and the UK facility are long-standing WLCG sites, so the infrastructure, expertise and staff experience needed to run HEP tools are already in place.
-
-Dedicated long-haul links carry each exposure from the summit to the USDF at SLAC within seconds of readout, with a three-day summit buffer protecting against network outages (Figure~\ref{fig:network}).
+Figure~\ref{fig:network} shows a schematic of the Rubin network and data flow.
+Dedicated long-haul links carry each exposure from the summit to the USDF at SLAC within seconds of readout, with a three-day summit buffer protecting against network outages.
 REUNA and AMLight carry the data from the summit to Miami; ESnet, G\'{E}ANT, JANET and RENATER provide inter-site connectivity, with transatlantic round-trip times of up to $\sim$165~ms.
 
-Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night compressed); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003}) that host published data products.
+Annual DRP is divided across the three facilities~\cite{2024EPJWC.29501042H,2025EPJWC.33701234H}: the USDF (35\%), which hosts the archive and is the only site running Prompt Processing; the FrDF (40\%), which holds a full copy of the raw data; and the UKDF (25\%), which holds only the raw data for its assigned sky region plus the adjacent patches needed at boundaries.
+% Both European facilities also serve the LHC, so the infrastructure, expertise and staff experience needed to run HEP tools are already in place (\S\ref{sec:intro}).
+
+Data movement falls into three domains~\cite{2025EPJWC.33701129H}: latency-critical transfer from the summit to the USDF ($\sim$4~TB per night compressed); volume-critical replication between facilities, with $\sim$2~PB of raw data flowing each year from the USDF to Europe and $\sim$20~PB of processed products flowing back; and scale-critical distribution of multi-PB releases to Independent Data Access Centers (IDACs) (\cite{RTN-003}) that host published science-ready data products.
 %
 \begin{figure}[h]
 \centering
@@ -259,7 +257,7 @@ An IDAC needs only a storage endpoint compatible with Rucio and FTS.
 Transfer orchestration is managed centrally at the USDF complemented by regional distribution hubs (e.g. CC-IN2P3 for some European IDACs), which prevents simultaneous downloads from congesting the archive.
 Transfers can also run directly between IDACs.
 DP1 (3.5~TB) was distributed to 9 IDACs in this way, with Globus used for NERSC~\cite{2026AJ....171..360V,RTN-086}, and the same infrastructure is being scaled to DP2 ($\mathcal{O}(100)$~TB) and to petabyte-scale Data Releases.
-Scientists access the data through the Rubin Science Platform~\cite{2024SPIE13101E..2BO}, where, as in HEP, they bring their analysis to the data rather than downloading it.
+Scientists access the data through the Rubin Science Platform~\cite{2024SPIE13101E..2BO}.
 
 % ============================================================
 \section{Open challenges and cross-disciplinary lessons}
@@ -271,23 +269,26 @@ The components described in \S\ref{sec:ecosystem} have been exercised individual
 Deploying them has exposed friction points that are instructive for any experiment crossing the HEP--astronomy boundary.
 
 The most important enabling factor was institutional overlap.
-All three Rubin data facilities already operated these tools for the LHC (\S\ref{sec:facilities}), so their systems, network and storage teams brought direct operational experience with Rucio, FTS and HTCondor, and Rubin staff with backgrounds in ATLAS, LHCb and CERN grid computing turned this proximity into practical deployment.
+All three Rubin data facilities already operated Rucio, FTS and HTCondor for the LHC (\S\ref{sec:facilities}), so staff with LHC and WLCG backgrounds could draw directly on that experience to deploy them for Rubin.
 
 The principal challenge is the file-count regime.
 In HEP, events are aggregated into multi-GB files, so per-file overheads are small relative to the data volume.
 In Rubin, the natural unit is the detector image: each visit comprises 189 science detectors processed independently, and every pipeline quantum writes its outputs (images, catalogs, metadata, logs and provenance) as separate Butler-tracked files.
 File counts therefore reach billions per Data Release, many in the KB to few-MB range, a regime in which file-oriented HEP tools struggle.
-At the USDF, S3 object storage removes the filesystem metadata bottleneck that large numbers of files impose on POSIX systems, but transfer to WebDAV storage at the European facilities remains an active engineering problem.
+At the USDF, S3 object storage avoids the filesystem metadata bottleneck that large file counts impose on POSIX filesystems, but efficient transfer to WebDAV-based storage at the European facilities remains an open engineering problem.
 Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products.
 Returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
 
 The second challenge is keeping the Butler's dataset model consistent with the file-oriented tools across three independent sites, and it is directly connected to the small-file problem: both difficulties trace back to having two independent systems that each record where a file resides.
 Each site's Butler registry knows only about locally present files.
-HermesK and \texttt{ctrl\_ingestd} (\S\ref{sec:rucio}) automate file arrival for datasets whose dimension records already exist at the destination; ensuring that calibration updates are propagated and acknowledged at every site before a campaign, which cannot be done by polling at Data Release scale, is an active area of development.
-Verifying end-to-end completeness also remains open: Rucio tracks whether a file has been transferred, but not whether it has been successfully ingested into the local Butler, leaving no unified view of what is actually available for processing at each site.
-The large file counts compound the problem at campaign end: retiring intermediate products requires purging records from both Rucio and the Butler registry, an operation that is slow at this scale.
-Extending Butler to carry multi-site location information natively is one approach under active consideration.
-Keeping dimension records current across sites adds a further layer of complexity: when a header error is identified after ingest, the correction must be applied to Butler's dimension records at every facility, a synchronisation problem with no equivalent in the single-registry HEP model.
+HermesK and \texttt{ctrl\_ingestd} (\S\ref{sec:rucio}) automate registration of arriving files for datasets whose dimension records already exist at the destination.
+Ensuring that calibration updates are propagated to, and acknowledged by, every site before a campaign is still under development, since polling does not scale to Data Release volumes.
+Verifying end-to-end completeness is also an open problem.
+Rucio tracks whether a file has been transferred, but not whether it has been successfully ingested into the local Butler, leaving no unified view of what is actually available for processing at each site.
+Large file counts compound the problem at campaign end: retiring intermediate products means purging records from both Rucio and the Butler registry, which is slow at this scale.
+Keeping dimension records consistent across sites adds a further layer of complexity.
+When a header error is identified after ingest, the correction must be applied to Butler's dimension records at every facility, a synchronisation problem with no equivalent in the single-registry HEP model.
+One approach under consideration is to extend the Butler to carry multi-site location information natively.
 
 % ============================================================
 \section{Conclusions}
@@ -295,10 +296,11 @@ Keeping dimension records current across sites adds a further layer of complexit
 % ============================================================
 
 Rubin Observatory is operational and delivering science.
-Since first on-sky images in April 2025, the Data Management System has transferred more than 90\,000 science-quality images from the summit in Chile to data facilities on three continents, issued millions of alerts per night, and produced two Data Previews.
-Even before the survey began, these data led to the discovery of more than 11\,000 new asteroids, including $\sim$380 trans-Neptunian objects, and captured the third known interstellar object, 3I/ATLAS, ten days before it was discovered.
+Since the first on-sky images in April 2025, the Data Management System has transferred more than 90\,000 science-quality images from the summit in Chile to data facilities on three continents, issued millions of alerts per night, and produced two Data Previews.
+Even before the survey began, commissioning data yielded more than 11\,000 new Solar System objects and a pre-discovery detection of 3I/ATLAS, the third known interstellar object.
 
-These results were achieved in collaboration with the HEP community and with HEP tools: Rucio and FTS for data movement, CernVM-FS for software distribution, and HTCondor, via BPS, for processing, building on experience gained with PanDA.
-Rubin's principal contribution back is Kafka messaging for the Rucio Hermes daemon, developed for HermesK, which makes Rucio's file-level transfers visible to the Butler without polling and is available to any experiment with similar requirements.
-The remaining challenges, chiefly the small-file regime and cross-site Butler consistency, are well understood and are being addressed for DR1; beyond DR1 the load grows every year, as each release reprocesses the entire cumulative dataset.
+These results were achieved in collaboration with the HEP community using Rucio, FTS, CernVM-FS and HTCondor via BPS, building on experience gained with PanDA.
+Rubin's principal contribution upstream is Kafka messaging for the Rucio Hermes daemon, developed for HermesK, which makes Rucio's file-level transfers visible to the Butler without polling.
+The remaining challenges, chiefly the small-file regime and cross-site Butler consistency, are well understood and are being addressed for DR1.
+Beyond DR1 the load grows annually, as each release reprocesses the entire cumulative dataset.
 Rubin's experience so far suggests that adopting and extending HEP infrastructure is a sound model for the next generation of data-intensive astronomical facilities.
