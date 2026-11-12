@@ -4,7 +4,8 @@
 % ============================================================
 
 On 30~June~2026, the NSF--DOE Vera C.\ Rubin Observatory began the Legacy Survey of Space and Time (LSST), a ten-year, wide-field optical survey of the southern sky that will produce the deepest and most complete time-domain map of the Universe to date. 
-The observatory was named by an Act of the US Congress in December 2019 for Vera C.\ Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter, and who was a tireless advocate for women in science. It is the first US national observatory named for a woman \citep[][]{1970ApJ...159..379R, 1980ApJ...238..471R}.
+The observatory was named by an Act of the US Congress in December 2019 for Vera C.\, Rubin (1928--2016), whose measurements of galaxy rotation curves provided compelling evidence for dark matter \citep[][]{1970ApJ...159..379R, 1980ApJ...238..471R}, and who was a tireless advocate for women in science.
+It is the first US national observatory named for a woman.
 
 Rubin works very differently from a traditional observatory. 
 At a pointed facility such as Gemini or Keck, a principal investigator proposes for observing time to answer a specific question; data volumes are modest, and the resulting dataset is typically downloaded to analyse locally.
@@ -62,8 +63,8 @@ The baseline survey~\cite{PSTN-055}, shown in figure~\ref{fig:survey-map}, devot
 Five Deep Drilling Fields take $\sim$7\% and reach $r\sim28$; mini- and micro-surveys ($\sim$1--10\%) cover the northern ecliptic, the Galactic plane and other specialised regions; and $\sim$3\% is reserved for Target of Opportunity follow-up of gravitational-wave and high-energy neutrino events.
 Localisation regions of tens to hundreds of square degrees must be searched within hours to catch a fading kilonova, and Rubin's combination of wide field and depth makes it uniquely suited to finding these faint, rapidly evolving optical counterparts.
 
-LSST data is used by $\sim$7500 scientists in $\sim$30 countries, organised into eight Science Collaborations\footnote{\url{https://rubinobservatory.org/for-scientists/science-collaborations}} supported by the LSST Discovery Alliance\footnote{\url{https://lsstdiscoveryalliance.org}}.
-
+LSST data are used by $\sim$7500 scientists across 29 countries.
+Many of them belong to one of eight Science Collaborations (SCs)\footnote{\url{https://rubinobservatory.org/for-scientists/science-collaborations}}, which coordinate scientific activities and are supported by the LSST Discovery Alliance\footnote{\url{https://lsstdiscoveryalliance.org}{https://lsstdiscoveryalliance.org}}.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.85\columnwidth,clip]{baseline_v5.3.0_10yrs_nvisits_compact}
@@ -101,7 +102,7 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 %\end{figure}
 
 The same commissioning data are already producing discoveries.
-The First Look observations alone revealed 1\,514 new asteroids, and the mid-2025 commissioning surveys added $\sim$11\,000 more, including $\sim$380 trans-Neptunian objects.
+The First Look observations alone revealed 1514 new asteroids, and the mid-2025 commissioning surveys added $\sim$11\,000 more, including $\sim$380 trans-Neptunian objects.
 Rubin also observed its first interstellar object before the survey began: LSSTCam images from the Science Validation survey contain detections of 3I/ATLAS (C/2025~N1)~\cite{2026ApJ..1001L..35C}, only the third interstellar object known, taken ten days before ATLAS discovered it on 1~July~2025 (Figure~\ref{fig:3IATLAS}).
 % With the moving-object pipelines not yet active,
 The detections were recovered retrospectively once the orbit was known, illustrating a general strength of wide-field surveys: repeated imaging records rare objects before their nature is recognised.
@@ -117,7 +118,7 @@ Image credit: NSF--DOE Vera C.\ Rubin Observatory.}
 Commissioning data are released as Data Previews~\cite{RTN-011}, delivered in formats representative of future releases.
 Data Preview 1 (DP1)~\cite{2026AJ....171..360V} released $\sim$\,3.5~TB of data acquired with the smaller nine-sensor LSST Commissioning Camera (LSSTComCam).
 % the first real Rubin data, and
-Data Preview 2 (DP2)~\cite{RTN-115}, released in two stages (catalogs and deep coadds on 27~July~2026, visit-level images in late 2026)  comprises $\sim$\,30,000 LSSTCam visits obtained between April~2025 to January~2026, including the First Look fields and the 3I/ATLAS images\footnote{\url{https://dp2.lsst.io}}.
+Data Preview 2 (DP2)~\cite{RTN-115}, released in two stages (catalogs and deep coadds on 27~July~2026, visit-level images in late 2026)  comprises $\sim$\,30\,000 LSSTCam visits obtained between April~2025 to January~2026, including the First Look fields and the 3I/ATLAS images\footnote{\url{https://dp2.lsst.io}}.
 Both were processed entirely at the USDF.
 %
 % ============================================================
@@ -171,8 +172,8 @@ The sky is partitioned into tracts of $\sim$1.6$^\circ$ on a side, each divided 
 Each facility receives its assigned tracts plus a buffer of adjacent patches for objects that straddle a boundary, such as bright stars, extended galaxies and moving asteroids; small overlap regions are processed at all three facilities and compared as numerical consistency checks before each release.
 All processing is orchestrated centrally from the USDF, including jobs that execute at remote facilities.
 
-The USDF, Rubin's allocation within SLAC's Shared Scientific Data Facility (S3DF), has 145 batch nodes ($\sim$17,400 cores, $\sim$21,600 Milano-equivalent) and $\sim$30~PB of installed disk, representative of the scale at each facility; beyond the batch and storage tier, the USDF hosts a 92-node Qserv cluster for catalog queries and a 12-node Cassandra cluster for the Alert Production Database (APDB).
-DP2 consumed $\sim$970 node-days ($\sim$2.8~million core-hours) to process $\sim$30,000 visits; DR1 is estimated at $\sim$35~million core-hours ($\sim$12,000 node-days), growing linearly with each subsequent release.
+The USDF, Rubin's allocation within SLAC's Shared Scientific Data Facility (S3DF), has 145 batch nodes ($\sim$17\,400 cores, $\sim$21\,600 Milano-equivalent) and $\sim$30~PB of installed disk, representative of the scale at each facility; beyond the batch and storage tier, the USDF hosts a 92-node Qserv cluster for catalog queries and a 12-node Cassandra cluster for the Alert Production Database (APDB).
+DP2 consumed $\sim$970 node-days ($\sim$2.8~million core-hours) to process $\sim$30\,000 visits; DR1 is estimated at $\sim$35~million core-hours ($\sim$12\,000 node-days), growing linearly with each subsequent release.
 
 % ============================================================
 \subsection{Summit to US Data Facility}
@@ -195,7 +196,6 @@ Only pixel data is transmitted through the IPsec channels.
 %
 The LSST Science Pipelines~\cite{PSTN-019} implement the scientific algorithms, from instrument signature removal through calibration, coaddition and difference imaging to catalog production.
 All input and output passes through the Butler~\cite{2022SPIE12189E..11J}, which hides file locations and formats from algorithm developers: tasks access data by scientific identifier (instrument, visit, detector, band, sky region), never by file path, and each repository combines
-% TODO: Comment from Tim needs checking -- "I thought the European sites were all using WebDAV and not using POSIX."
 a relational registry with a datastore on POSIX, WebDAV or S3-compatible storage.
 
 The Batch Processing System (BPS) (\cite{2025ASPC..538..325G}) queries the Butler registry and builds a Quantum Graph, a directed acyclic graph in which each node is one \texttt{PipelineTask} applied to one unit of data; for a full release campaign it contains millions of nodes.
@@ -275,7 +275,7 @@ The principal challenge is the file-count regime.
 In HEP, events are aggregated into multi-GB files, so per-file overheads are small relative to the data volume.
 In Rubin, the natural unit is the detector image: each visit comprises 189 science detectors processed independently, and every pipeline quantum writes its outputs (images, catalogs, metadata, logs and provenance) as separate Butler-tracked files.
 File counts therefore reach billions per Data Release, many in the KB to few-MB range, a regime in which file-oriented HEP tools struggle.
-At the USDF, S3 object storage avoids the filesystem metadata bottleneck that large file counts impose on POSIX filesystems, but efficient transfer to WebDAV-based storage at the European facilities remains an open engineering problem.
+At the USDF, S3 object storage avoids the filesystem metadata bottleneck that large file counts impose on POSIX filesystems, but per-file transfer and ingest overheads at the European facilities at this file-count regime remain an open engineering problem.
 Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products.
 Returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
 
