@@ -275,7 +275,7 @@ The principal challenge is the file-count regime.
 In HEP, events are aggregated into multi-GB files, so per-file overheads are small relative to the data volume.
 In Rubin, the natural unit is the detector image: each visit comprises 189 science detectors processed independently, and every pipeline quantum writes its outputs (images, catalogs, metadata, logs and provenance) as separate Butler-tracked files.
 File counts therefore reach billions per Data Release, many in the KB to few-MB range, a regime in which file-oriented HEP tools struggle.
-At the USDF, S3 object storage avoids the filesystem metadata bottleneck that large file counts impose on POSIX filesystems, but per-file transfer and ingest overheads at the European facilities at this file-count regime remain an open engineering problem.
+At the USDF, S3 object storage avoids the filesystem metadata bottleneck that large file counts impose on POSIX filesystems, but per-file transfer and ingest overheads at the European facilities remain an open engineering problem.
 Current mitigations are bundling per-quantum outputs into zip archives and not persisting intermediate products.
 Returning processed outputs from the European facilities to the USDF archive remains on the critical path for DR1.
 
